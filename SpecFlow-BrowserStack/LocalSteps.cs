@@ -11,9 +11,9 @@ namespace SpecFlow_BrowserStack
     private IWebDriver _driver;
     readonly BrowserStackDriver _bsDriver;
 
-    public LocalSteps()
+    public LocalSteps(ScenarioContext scenarioContext)
     {
-      _bsDriver = (BrowserStackDriver)ScenarioContext.Current["bsDriver"];
+      _bsDriver = (BrowserStackDriver)scenarioContext["bsDriver"];
     }
 
     [Given(@"I opened health check for (.*) and (.*)")]

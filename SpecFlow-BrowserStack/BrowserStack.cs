@@ -16,14 +16,20 @@ namespace SpecFlow_BrowserStack
   [Binding]
   public sealed class BrowserStack
   {
+    private readonly ScenarioContext _scenarioContext;
     private BrowserStackDriver bsDriver;
     private string[] tags;
+
+    public BrowserStack(ScenarioContext context)
+    {
+        _scenarioContext = context;
+    }
 
     [BeforeScenario]
     public void BeforeScenario()
     {
-      bsDriver = new BrowserStackDriver(ScenarioContext.Current);
-      ScenarioContext.Current["bsDriver"] = bsDriver;
+      bsDriver = new BrowserStackDriver(_scenarioContext);
+      _scenarioContext["bsDriver"] = bsDriver;
     }
 
     [AfterScenario]

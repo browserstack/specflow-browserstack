@@ -13,9 +13,9 @@ namespace SpecFlow.BrowserStack
     private IWebDriver _driver;
     readonly BrowserStackDriver _bsDriver;
 
-    public SingleSteps()
+    public SingleSteps(ScenarioContext scenarioContext)
     {
-      _bsDriver = (BrowserStackDriver)ScenarioContext.Current["bsDriver"];
+      _bsDriver = (BrowserStackDriver)scenarioContext["bsDriver"];
     }
 
     [Given(@"I am on the google page for (.*) and (.*)")]
