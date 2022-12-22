@@ -95,7 +95,7 @@ namespace SpecFlow_BrowserStack
         browserStackLocal.start(bsLocalArgs);
       }
 
-      driver = new RemoteWebDriver(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
+      driver = new RemoteWebDriver(new Uri("https://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
       return driver;
     }
 
