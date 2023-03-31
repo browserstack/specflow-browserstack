@@ -29,7 +29,7 @@ namespace SpecFlowBrowserStack
 		public void ThenIShouldSeeTitle(string localString)
 		{
 			Thread.Sleep(5000);
-			StringAssert.Contains(localStrings, _driver.Title);
+			StringAssert.Contains(localString, _driver.Title);
 		}
 	}
 }

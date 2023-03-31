@@ -20,7 +20,7 @@ namespace SpecFlowBrowserStack
 
 		public SampleTest()
 		{
-			_driver = BrowserStackSpecflowTest.ThreadLocalDriver.Value;
+			_driver = BrowserStackSpecFlowTest.ThreadLocalDriver.Value;
 			wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
 		}
 
