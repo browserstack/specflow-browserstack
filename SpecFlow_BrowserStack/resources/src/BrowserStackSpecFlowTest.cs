@@ -14,8 +14,8 @@ namespace SpecFlowBrowserStack
 		private FeatureContext _featureContext;
 		private ScenarioContext _scenarioContext;
 
-        public static ThreadLocal<IWebDriver> ThreadLocalDriver = new ThreadLocal<IWebDriver>();
-        private static readonly ILog log = LogManager.GetLogger(typeof(BrowserStackSpecFlowTest));
+		public static ThreadLocal<IWebDriver> ThreadLocalDriver = new ThreadLocal<IWebDriver>();
+		private static readonly ILog log = LogManager.GetLogger(typeof(BrowserStackSpecFlowTest));
 
 		public BrowserStackSpecFlowTest(FeatureContext featureContext, ScenarioContext scenarioContext)
 		{
@@ -35,7 +35,7 @@ namespace SpecFlowBrowserStack
 		[AfterScenario]
 		public static void TearDown(ScenarioContext scenarioContext)
 		{
-				Shutdown();
+			Shutdown();
 		}
 
 		protected static void Shutdown()
@@ -47,4 +47,3 @@ namespace SpecFlowBrowserStack
         }
 	}
 }
-
