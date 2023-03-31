@@ -7,7 +7,7 @@
 
 ## Setup
 * Clone the repo
-* Open the solution `SpecFlow_BrowserStack.sln` in Visual Studio 2017.
+* Open the solution `SpecFlow_BrowserStack.sln` in Visual Studio.
 * Build the solution
 * Update `browserstack.yml` file with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings)
 

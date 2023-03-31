@@ -6,7 +6,7 @@ using NUnit.Framework;
 using SeleniumExtras.WaitHelpers;
 using System.Threading;
 
-namespace SpecflowBrowserStack
+namespace SpecFlowBrowserStack
 {
 	[Binding]
 	public class SampleTest
@@ -30,7 +30,7 @@ namespace SpecflowBrowserStack
             _driver.Navigate().GoToUrl("https://bstackdemo.com");
 		}
 
-		[Then(@"I should see title `StackDemo`")]
+		[Then(@"I should see title (.*)")]
 		public void ThenIShouldSeeTitle(string title)
 		{
 			Thread.Sleep(5000);
@@ -46,7 +46,7 @@ namespace SpecflowBrowserStack
 			_driver.FindElement(By.XPath("//*[@id=\"1\"]/div[4]")).Click();
 		}
 
-		[Then(@"I check if cart is opened")]
+		[When(@"I check if cart is opened")]
 		public void ThenICheckIfCartIsOpened()
 		{
 			cartOpened = _driver.FindElement(By.XPath("//*[@class=\"float-cart__content\"]")).Displayed;

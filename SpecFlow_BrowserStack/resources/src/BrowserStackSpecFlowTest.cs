@@ -6,18 +6,18 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 
-namespace SpecflowBrowserStack
+namespace SpecFlowBrowserStack
 {
 	[Binding]
-	public class BrowserStackSpecflowTest
+	public class BrowserStackSpecFlowTest
 	{
 		private FeatureContext _featureContext;
 		private ScenarioContext _scenarioContext;
 
         public static ThreadLocal<IWebDriver> ThreadLocalDriver = new ThreadLocal<IWebDriver>();
-        private static readonly ILog log = LogManager.GetLogger(typeof(BrowserStackSpecflowTest));
+        private static readonly ILog log = LogManager.GetLogger(typeof(BrowserStackSpecFlowTest));
 
-		public BrowserStackSpecflowTest(FeatureContext featureContext, ScenarioContext scenarioContext)
+		public BrowserStackSpecFlowTest(FeatureContext featureContext, ScenarioContext scenarioContext)
 		{
 			_featureContext = featureContext;
 			_scenarioContext = scenarioContext;
@@ -35,9 +35,7 @@ namespace SpecflowBrowserStack
 		[AfterScenario]
 		public static void TearDown(ScenarioContext scenarioContext)
 		{
-			
 				Shutdown();
-
 		}
 
 		protected static void Shutdown()
