@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{925E0612
 		build_local.ps1 = build_local.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow-BrowserStack", "SpecFlow-BrowserStack\SpecFlow-BrowserStack.csproj", "{445D58CF-ED98-4C47-9E51-7EEF066305FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow_BrowserStack", "SpecFlow_BrowserStack\SpecFlow_BrowserStack.csproj", "{445D58CF-ED98-4C47-9E51-7EEF066305FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
