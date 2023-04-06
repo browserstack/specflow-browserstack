@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BrowserStack.TestAdapter" Version="0.0.3" />
+    <PackageReference Include="BrowserStack.TestAdapter" Version="0.*" />
     <PackageReference Include="BrowserStackLocal" Version="2.0.0" />
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
