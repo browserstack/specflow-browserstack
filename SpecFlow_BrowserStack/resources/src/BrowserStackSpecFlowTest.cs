@@ -27,8 +27,8 @@ namespace SpecFlowBrowserStack
 		[BeforeScenario]
 		public static void Initialize(ScenarioContext scenarioContext)
 		{
-            ChromeOptions capabilities = new ChromeOptions();
-            ThreadLocalDriver.Value = new RemoteWebDriver(new Uri("https://hub.browserstack.com/wd/hub/"),capabilities);
+			ChromeOptions capabilities = new ChromeOptions();
+			ThreadLocalDriver.Value = new RemoteWebDriver(new Uri("https://hub.browserstack.com/wd/hub/"),capabilities);
 		}
 
 
@@ -40,10 +40,10 @@ namespace SpecFlowBrowserStack
 
 		protected static void Shutdown()
 		{
-            if (ThreadLocalDriver.IsValueCreated)
-            {
-                ThreadLocalDriver.Value?.Quit();
-            }
-        }
+			if (ThreadLocalDriver.IsValueCreated)
+			{
+				ThreadLocalDriver.Value?.Quit();
+			}
+		}
 	}
 }

@@ -27,7 +27,7 @@ namespace SpecFlowBrowserStack
 		[Given(@"I navigate to website")]
 		public void GivenINavigatedTowebsite()
 		{
-            _driver.Navigate().GoToUrl("https://bstackdemo.com");
+			_driver.Navigate().GoToUrl("https://bstackdemo.com");
 		}
 
 		[Then(@"I should see title (.*)")]
