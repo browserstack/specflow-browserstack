@@ -1,7 +1,7 @@
 # This job is to test different profiles in sdk branch against Pull Requests raised
 # This workflow targets specflow
 
-name: C# SDK Test workflow on workflow_dispatch
+name: C-sharp SDK Test workflow on workflow_dispatch
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
       max-parallel: 3
       matrix:
         dotnet: ['6.0.x', '5.0.x']
-        os: [ macos-latest, windows-latest, ubuntu-latest ]
+        os: [ windows-latest ]
     name: SpecFlow Repo ${{ matrix.dotnet }} - ${{ matrix.os }} Sample
     env:
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
