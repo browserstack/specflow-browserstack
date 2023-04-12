@@ -1,0 +1,88 @@
+# This job is to test different profiles in sdk branch against Pull Requests raised
+# This workflow targets specflow
+
+name: C-sharp SDK Test workflow on workflow_dispatch(from master branch)
+
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request_number:
+        description: 'The pull request number to build'
+        required: true
+
+jobs:
+  comment-run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        dotnet: ['6.0.x', '5.0.x']
+        os: [ windows-latest ]
+    name: SpecFlow Repo ${{ matrix.dotnet }} - ${{ matrix.os }} Sample
+    env:
+      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: refs/pull/${{ github.event.inputs.pull_request_number }}/head
+      - name: Fetch Commit SHA
+        run: |
+          git log -1 --format='%H'
+          echo "commit_sha=$(git log -1 --format='%H')" >> $GITHUB_ENV
+          echo "commit_sha=$(git log -1 --format='%H')" >> $env:GITHUB_ENV
+      - uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975
+        id: status-check-in-progress
+        env:
+          job_name: SpecFlow Repo ${{ matrix.dotnet }} - ${{ matrix.os }} Sample
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const result = await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: process.env.job_name,
+              head_sha: process.env.commit_sha,
+              status: 'in_progress'
+            }).catch((err) => ({status: err.status, response: err.response}));
+            console.log(`The status-check response : ${result.status} Response : ${JSON.stringify(result.response)}`)
+            if (result.status !== 201) {
+              console.log('Failed to create check run')
+            }
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Install dependencies
+        run: dotnet build
+
+      - name: Run sample tests
+        run: dotnet test --filter "Category=sample-test"
+
+      - name: Run local tests
+        run: dotnet test --filter "Category=sample-local-test"
+
+      - if: always()
+        uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975
+        id: status-check-completed
+        env:
+          conclusion: ${{ job.status }}
+          job_name: SpecFlow Repo ${{ matrix.dotnet }} - ${{ matrix.os }} Sample
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const result = await github.rest.checks.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: process.env.job_name,
+            head_sha: process.env.commit_sha,
+            status: 'completed',
+            conclusion: process.env.conclusion
+            }).catch((err) => ({status: err.status, response: err.response}));
+            console.log(`The status-check response : ${result.status} Response : ${JSON.stringify(result.response)}`)
+            if (result.status !== 201) {
+              console.log('Failed to create check run')
+            }
