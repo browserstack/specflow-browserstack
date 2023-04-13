@@ -14,7 +14,7 @@ accessKey: YOUR_ACCESS_KEY
 # Set 'projectName' to the name of your project. Example, Marketing Website
 projectName: BrowserStack Samples
 # Set `buildName` as the name of the job / testsuite being run
-buildName: browserstack build
+buildName: test specflow
 # `buildIdentifier` is a unique id to differentiate every execution that gets appended to
 # buildName. Choose your buildIdentifier format from the available expressions:
 # ${BUILD_NUMBER} (Default): Generates an incremental counter with every execution
