@@ -17,7 +17,16 @@ jobs:
       fail-fast: false
       max-parallel: 3
       matrix:
-        dotnet: ['6.0.x', '5.0.x']
+        dotnet: ['6.0.x', '8.0.x', '9.0.x', '10.0.x']
+        include:
+          - dotnet: '6.0.x'
+            target-framework: 'net6.0'
+          - dotnet: '8.0.x'
+            target-framework: 'net8.0'
+          - dotnet: '9.0.x'
+            target-framework: 'net9.0'
+          - dotnet: '10.0.x'
+            target-framework: 'net10.0'
         os: [ windows-latest ]
     name: SpecFlow Repo ${{ matrix.dotnet }} - ${{ matrix.os }} Sample
     env:
@@ -49,17 +58,26 @@ jobs:
             }
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
+        id: setup-dotnet
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
+      - name: Pin SDK version via global.json
+        run: |
+          $major = "${{ matrix.target-framework }}".Replace("net","").Split(".")[0]
+          $version = "$major.0.100"
+          "{`"sdk`":{`"version`":`"$version`",`"rollForward`":`"latestFeature`"}}" | Set-Content global.json
+          Get-Content global.json
+        shell: pwsh
+
       - name: Install dependencies
-        run: dotnet build
+        run: dotnet build /p:TargetFrameworks=${{ matrix.target-framework }} /p:TargetFramework=${{ matrix.target-framework }}
 
       - name: Run sample tests
-        run: dotnet test --filter "Category=sample-test"
+        run: dotnet test --filter "Category=sample-test" /p:TargetFrameworks=${{ matrix.target-framework }} /p:TargetFramework=${{ matrix.target-framework }}
 
       - name: Run local tests
-        run: dotnet test --filter "Category=sample-local-test"
+        run: dotnet test --filter "Category=sample-local-test" /p:TargetFrameworks=${{ matrix.target-framework }} /p:TargetFramework=${{ matrix.target-framework }}
 
       - if: always()
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975
